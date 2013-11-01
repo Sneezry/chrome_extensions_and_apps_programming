@@ -1,0 +1,12 @@
+{
+    "manifest_version": 2,
+    "name": "永远点不到的搜索按钮",
+    "version": "1.0",
+    "description": "让你永远也点击不到Google的搜索按钮",
+    "content_scripts": [
+        {
+            "matches": ["*://www.google.com/"],
+            "js": ["js/cant_touch.js"]
+        }
+    ]
+}
