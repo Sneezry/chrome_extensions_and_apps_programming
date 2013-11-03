@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "天气预报",
+    "version": "1.0",
+    "description": "查看未来两周的天气情况",
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "images/icon19.png",
+            "38": "images/icon38.png"
+        },
+        "default_title": "天气预报",
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html",
+    "permissions": [
+        "http://api.openweathermap.org/data/2.5/forecast?q=*"
+    ]
+}
