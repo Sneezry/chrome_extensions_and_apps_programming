@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "扩展内部通信Demo",
+    "version": "1.0",
+    "description": "扩展内部通信Demo",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    }
+}
