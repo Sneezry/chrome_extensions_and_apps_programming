@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Turtle",
+    "version": "1.0",
+    "description": "Turtle",
+    "browser_action": {
+        "default_icon": {
+            "19": "images/icon19_0.png",
+            "38": "images/icon38_0.png"
+        },
+        "default_title": "Turtle"
+    },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    }
+}
