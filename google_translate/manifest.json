@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Google Translate",
+    "version": "1.0",
+    "description": "Translate what you select with Google",
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+    "icons": {
+        "16": "images/icon16.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["js/content.js"]
+        }
+    ],
+    "permissions": [
+        "contextMenus"
+    ]
+}
