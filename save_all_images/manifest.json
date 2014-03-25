@@ -13,7 +13,6 @@
         }
     ],
     "permissions": [
-        "tabs",
         "contextMenus",
         "downloads"
     ]
