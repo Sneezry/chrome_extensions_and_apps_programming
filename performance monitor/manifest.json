@@ -1,0 +1,20 @@
+{
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    },
+    "manifest_version": 2,
+    "name": "Performance Monitor",
+    "version": "1.0",
+    "description": "A performance monitor to show cpu and memory status.",
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "permissions": [
+        "system.cpu",
+        "system.memory"
+    ]
+}
