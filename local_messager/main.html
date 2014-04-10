@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Local Messager</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    border: #EEE 1px solid;
+}
+
+#history {
+    margin: 10px;
+    border: gray 1px solid;
+    height: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#history div {
+    padding: 10px;
+    border-bottom: #EEE 1px solid;
+}
+
+#msg {
+    margin: 10px;
+    width: 380px;
+    height: 80px;
+    box-sizing: border-box;
+    border: gray 1px solid;
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+<div id="history"></div>
+<input type="text" id="msg" />
+<script src="main.js"></script>
+</body>
+</html>
