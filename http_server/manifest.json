@@ -5,9 +5,9 @@
         }
     },
     "manifest_version": 2,
-    "name": "Http Server",
+    "name": "HTTP Server",
     "version": "1.0",
-    "description": "A http server.",
+    "description": "An HTTP server.",
     "icons": {
         "128": "http_server.png"
     },
