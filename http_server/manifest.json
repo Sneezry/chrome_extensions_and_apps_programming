@@ -1,0 +1,22 @@
+{
+    "app": {
+        "background": {
+            "scripts": ["tcp.js", "tcpServer.js", "background.js"]
+        }
+    },
+    "manifest_version": 2,
+    "name": "Http Server",
+    "version": "1.0",
+    "description": "A http server.",
+    "icons": {
+        "128": "http_server.png"
+    },
+    "sockets": {
+        "tcp": {
+            "connect": "*"
+        },
+        "tcpServer": {
+            "listen": ":80"
+        }
+    }
+}
