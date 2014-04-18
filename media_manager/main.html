@@ -1,0 +1,176 @@
+<html>
+<head>
+<style>
+@font-face {
+	font-family: 'iconfont';
+    src: url('iconfont.woff') format('woff'); /* iOS 4.1- */
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #2D2D2D;
+}
+
+#appTitle {
+	height: 60px;
+	line-height: 60px;
+	padding: 0 20px;
+	font-size: 24px;
+	color: #CCC;
+	background: #222;
+	position: relative;
+}
+
+#path {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	color: #888;
+	font-size: 16px;
+	background: #222;
+	border-bottom: black 1px solid;
+	box-sizing: border-box;
+}
+
+#path span {
+	display: block;
+	float: left;
+}
+
+#path span.name {
+	max-width: 100px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#path span.pointer {
+	padding: 0 10px 0 5px;
+}
+
+#container .item {
+	display: block;
+	height: 100px;
+	width: 100px;
+	float: left;
+	color: white;
+}
+
+#container .item .icon {
+	display: block;
+	text-align: center;
+	height: 80px;
+	line-height: 80px;
+	font-size: 60px;
+	font-family: 'iconfont';
+}
+
+#container .item .text {
+	display: block;
+	text-align: center;
+	padding: 0 5px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#edit, #scan {
+	display: inline-block;
+	font-size: 12px;
+	font-family: 'iconfont';
+	height: 20px;
+	line-height: 20px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+@-webkit-keyframes loading {
+	0% {
+		left: 0;
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
+	}
+	100% {
+		left: 100%;
+		opacity: 0;
+	}
+}
+
+.loading {
+	width: 5px;
+	height: 5px;
+	background: #CCC;
+	position: absolute;
+	opacity: 0;
+	-webkit-animation: loading 5s;
+	-webkit-animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
+	-webkit-animation-iteration-count: infinite;
+}
+
+.loading[index="0"] {
+	-webkit-animation-delay: 0.3s;
+}
+
+.loading[index="1"] {
+	-webkit-animation-delay: 0.6s;
+}
+
+.loading[index="2"] {
+	-webkit-animation-delay: 0.9s;
+}
+
+.loading[index="3"] {
+	-webkit-animation-delay: 1.2s;
+}
+
+.loading[index="4"] {
+	-webkit-animation-delay: 1.5s;
+}
+
+#loading {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	display: none;
+}
+
+#error {
+	background: rgba(255, 255, 255, 0.5);
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #222;
+	text-align: center;
+	display: none;
+}
+</style>
+</head>
+<body>
+<div id="error">更新失败</div>
+<div id="appTitle">Media Manager<span id="edit">&#x3466;</span><span id="scan">&#xf015c;</span>
+<div id="loading">
+<div class="loading" index="0"></div>
+<div class="loading" index="1"></div>
+<div class="loading" index="2"></div>
+<div class="loading" index="3"></div>
+<div class="loading" index="4"></div>
+</div>
+</div>
+<div id="path"><span id="home" class="name">媒体库</span><span class="pointer">»</span><span id="subpath"></span></div>
+<div id="container"></div>
+<script src="main.js"></script>
+</body>
+</html>

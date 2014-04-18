@@ -1,0 +1,17 @@
+{
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    },
+    "manifest_version": 2,
+    "name": "Media Manager",
+    "version": "1.0",
+    "description": "A media manage tool.",
+    "icons": {
+        "128": "logo.png"
+    },
+    "permissions": [
+        {"mediaGalleries": ["read", "delete", "copyTo", "allAutoDetected"]}
+    ]
+}
