@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "USD Price",
+    "version": "1.0",
+    "description": "查询美元当日价格",
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
+    "icons": {
+        "16": "images/icon16.png"
+    },
+    "omnibox": {
+        "keyword": "usd"
+    },
+    "permissions": [
+        "*://query.yahooapis.com/*"
+    ]
+}
