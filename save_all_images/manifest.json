@@ -4,15 +4,11 @@
     "version": "1.0",
     "description": "Save all images in current tab",
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": false
     },
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["main.js"]
-        }
-    ],
     "permissions": [
+        "activeTab",
         "contextMenus",
         "downloads"
     ]
