@@ -1,17 +1,23 @@
-chrome.contextMenus.create({
+chrome.runtime.onInstalled.addListener(function(){
+  chrome.contextMenus.create({
+    'id':'saveall',
     'type':'normal',
     'title':'保存所有图片',
-    'onclick':saveall
+  });
 });
 
-function saveall(info, tab){
-	chrome.tabs.sendMessage(tab.id, 'download', function(urls){
-		for(var i=0,urlsLen=urls.length; i<urlsLen; i++){
-			chrome.downloads.download({
-				'url': urls[i],
-				'conflictAction': 'uniquify',
-				'saveAs': false
-			});
-		}
-	});
-}
+chrome.contextMenus.onClicked.addListener(function(info, tab){
+  if(info.menuItemId == 'saveall'){
+    chrome.tabs.executeScript(tab.id, {file: 'main.js'}, function(results){
+      if (results && results[0] && results[0].length){
+        results[0].forEach(function(url) {
+          chrome.downloads.download({
+            url: url,
+            conflictAction: 'uniquify',
+            saveAs: false
+          });
+        });
+      }
+    });
+  }
+});
