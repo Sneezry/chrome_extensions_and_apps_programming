@@ -6,7 +6,7 @@
     "content_scripts": [
         {
             "matches": ["*://www.google.com/"],
-            "js": ["js/cant_touch.js"]
+            "js": ["js/cannot_touch.js"]
         }
     ]
 }
