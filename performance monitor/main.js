@@ -1,4 +1,4 @@
-function getCpuUrge(callback){
+function getCpuUsage(callback){
     chrome.system.cpu.getInfo(function(info){
         var total = 0;
         var user = 0;
@@ -17,28 +17,28 @@ function getCpuUrge(callback){
     });
 }
 
-function getMemUrge(callback){
+function getMemUsage(callback){
     chrome.system.memory.getInfo(function(info){
         callback(info);
     });
 }
 
 function updateCpuHistory(){
-    getCpuUrge(function(urge){
+    getCpuUsage(function(usage){
         cpu_history.user.shift();
-        cpu_history.user.push(urge.user);
+        cpu_history.user.push(usage.user);
         cpu_history.kernel.shift();
-        cpu_history.kernel.push(urge.kernel);
+        cpu_history.kernel.push(usage.kernel);
         cpu_history.total.shift();
-        cpu_history.total.push(urge.total);
+        cpu_history.total.push(usage.total);
         showCpu();
     });
 }
 
 function updateMemHistory(){
-    getMemUrge(function(urge){
+    getMemUsage(function(usage){
         mem_history.used.shift();
-        mem_history.used.push(Math.round((urge.capacity-urge.availableCapacity)/urge.capacity*100));
+        mem_history.used.push(Math.round((usage.capacity-usage.availableCapacity)/usage.capacity*100));
         showMem();
     });
 }
@@ -48,67 +48,75 @@ function updateData(){
     updateMemHistory();
 }
 
-function showCpu(){
-    var history = {
-        labels : (function(){for(var i=0,labels=[];i<ponits_num;labels.push(''),i++);return labels;})(),
-        datasets : [
+    function showCpu(){
+        var history = {
+            labels : (function(){for(var i=0,labels=[];i<ponits_num;labels.push(''),i++);return labels;})(),
+            datasets : [
+                {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    data : cpu_history.total
+                },
+                {
+                    fillColor : "rgba(90,140,255,0.5)",
+                    data : cpu_history.kernel
+                },
+                {
+                    fillColor : "rgba(255,90,90,0.5)",
+                    data : cpu_history.user
+                }
+            ]
+        };
+
+        var now = [
             {
-                fillColor : "rgba(220,220,220,0.5)",
-                data : cpu_history.total
+                value: cpu_history.total[ponits_num-1],
+                color:"rgba(220,220,220,0.7)"
             },
             {
-                fillColor : "rgba(90,140,255,0.5)",
-                data : cpu_history.kernel
+                value : 100-cpu_history.total[ponits_num-1],
+                color : "rgba(220,220,220,0.3)"
+            }            
+        ];
+        var his_ctx = document.getElementById('cpu_history').getContext("2d");
+        var now_ctx = document.getElementById("cpu_total").getContext("2d");
+        if(!cpu_chart_line || !cpu_chart_pie){
+            cpu_chart_line = new Chart(his_ctx);
+            cpu_chart_pie = new Chart(now_ctx);
+        }
+        cpu_chart_line.Line(history, {scaleFontSize:4,pointDot:false,animation:false});
+        cpu_chart_pie.Pie(now, {segmentShowStroke:false,animation:false});
+    }
+
+    function showMem(){
+        var history = {
+            labels : (function(){for(var i=0,labels=[];i<ponits_num;labels.push(''),i++);return labels;})(),
+            datasets : [
+                {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    data : mem_history.used
+                }
+            ]
+        };
+
+        var now = [
+            {
+                value: mem_history.used[ponits_num-1],
+                color:"rgba(220,220,220,0.7)"
             },
             {
-                fillColor : "rgba(255,90,90,0.5)",
-                data : cpu_history.user
-            }
-        ]
-    };
-
-    var now = [
-        {
-            value: cpu_history.total[ponits_num-1],
-            color:"rgba(220,220,220,0.7)"
-        },
-        {
-            value : 100-cpu_history.total[ponits_num-1],
-            color : "rgba(220,220,220,0.3)"
-        }            
-    ];
-    var his_ctx = document.getElementById('cpu_history').getContext("2d");
-    var now_ctx = document.getElementById("cpu_total").getContext("2d");
-    new Chart(his_ctx).Line(history, {scaleFontSize:4,pointDot:false,animation:false});
-    new Chart(now_ctx).Pie(now, {segmentShowStroke:false,animation:false});
-}
-
-function showMem(){
-    var history = {
-        labels : (function(){for(var i=0,labels=[];i<ponits_num;labels.push(''),i++);return labels;})(),
-        datasets : [
-            {
-                fillColor : "rgba(220,220,220,0.5)",
-                data : mem_history.used
-            }
-        ]
-    };
-
-    var now = [
-        {
-            value: mem_history.used[ponits_num-1],
-            color:"rgba(220,220,220,0.7)"
-        },
-        {
-            value : 100-mem_history.used[ponits_num-1],
-            color : "rgba(220,220,220,0.3)"
-        }            
-    ];
-    var his_ctx = document.getElementById('mem_history').getContext("2d");
-    var now_ctx = document.getElementById("mem_total").getContext("2d");
-    new Chart(his_ctx).Line(history, {scaleFontSize:4,pointDot:false,animation:false});
-    new Chart(now_ctx).Pie(now, {segmentShowStroke:false,animation:false});
-}
+                value : 100-mem_history.used[ponits_num-1],
+                color : "rgba(220,220,220,0.3)"
+            }            
+        ];
+        var his_ctx = document.getElementById('mem_history').getContext("2d");
+        var now_ctx = document.getElementById("mem_total").getContext("2d");
+        if(!mem_chart_line || !mem_chart_pie){
+            mem_chart_line = new Chart(his_ctx);
+            mem_chart_pie = new Chart(now_ctx);
+        }
+        mem_chart_line.Line(history, {scaleFontSize:4,pointDot:false,animation:false});
+        mem_chart_pie.Pie(now, {segmentShowStroke:false,animation:false});
+    }
 
 function init(){
     cpu_history = {
@@ -149,6 +157,6 @@ function init_mem_history(){
     setInterval(updateData, 1000);
 }
 
-var cpu_history, mem_history, ponits_num=20;
+var cpu_history, mem_history, ponits_num=20, cpu_chart_pie, cpu_chart_line, mem_chart_pie, mem_chart_line;
 
 init();
