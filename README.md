@@ -1,6 +1,8 @@
 Chrome扩展及应用开发
 ====================
 
+![Chrome扩展及应用开发](http://www.ituring.com.cn/download/01g5ecFVoWUi)
+
 您可以通过以下渠道获得本书：
 
 + 免费但未经编辑的首发电子版：<http://www.ituring.com.cn/book/1421>，支持推送至Kindle及在线阅读
