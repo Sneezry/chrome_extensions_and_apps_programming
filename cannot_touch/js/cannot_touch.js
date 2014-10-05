@@ -17,4 +17,4 @@ function over_btn(e){
     btn_move(this, e.clientX, e.clientY);
 }
 
-document.getElementById('gbqfba').onmouseover = over_btn;
+(document.getElementsByName('btnK'))[0].onmouseover = over_btn;
