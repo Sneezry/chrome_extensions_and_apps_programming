@@ -1,14 +1,7 @@
-function httpRequest(url, callback){
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            callback(xhr.responseText);
-        }
-    }
-    xhr.send();
-}
-
-httpRequest('http://sneezryworks.sinaapp.com/ip.php', function(ip){
-    document.getElementById('ip_div').innerText = ip;
-});
+$.get('http://ip.chinaz.com', function (res){
+    var resJ = $(res);
+    var re = /\d+.\d+.\d+.\d+/;
+    var ip = re.exec(resJ.find('p.pl10').text())[0];
+    // console.log(resJ.find('p.pl10').text());
+    $('#ip_div').text(ip);
+})

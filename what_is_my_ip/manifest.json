@@ -17,6 +17,7 @@
         "default_popup": "popup.html"
     },
     "permissions": [
-        "http://sneezryworks.sinaapp.com/ip.php"
-    ]
+        "http://ip.chinaz.com/"
+    ],
+    "content_security_policy": "script-src 'self' https://apps.bdimg.com; object-src 'self'"
 }
